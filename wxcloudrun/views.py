@@ -18,9 +18,15 @@ def wx():
         "content": "Hello World"
         }
     }
-    url = f"https://api.weixin.qq.com/cgi-bin/message/custom/send??from_appid=wx8bfa8275fb71767f"
+    url = f"https://api.weixin.qq.com/cgi-bin/message/custom/send?from_appid=wx8bfa8275fb71767f"
     r = requests.post(url, json=data)
     return data
 
+@app.route('/test')
+def test():
+    """
+    :return: 返回index页面
+    """
+    return "data"
 # if __name__ == '__main__':
 #     app.run()
