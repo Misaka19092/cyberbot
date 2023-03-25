@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-@app.route('/wx', methods=['POST'])
+@app.route('/', methods=['POST'])
 
 def wx():
     # rec_data = request.get_json()
