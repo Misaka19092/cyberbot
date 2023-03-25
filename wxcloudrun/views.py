@@ -20,7 +20,7 @@ def wx():
     }
     url = f"https://api.weixin.qq.com/cgi-bin/message/custom/send??from_appid=wx8bfa8275fb71767f"
     r = requests.post(url, json=data)
-    return 'hello'
+    return data
 
 # if __name__ == '__main__':
 #     app.run()
