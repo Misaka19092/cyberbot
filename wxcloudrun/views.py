@@ -8,18 +8,18 @@ from wxcloudrun.response import make_succ_empty_response, make_succ_response, ma
 @app.route('/', methods=['POST'])
 
 def wx():
-    rec_data = request.get_json()
-    openid = request.headers.get('x-wx-openid')
-    message = rec_data['message']
-    data = {
-        "touser": openid,
-        "msgtype": "text",
-        "text": {
-            "content": "Hello World,{}".format(message)
-        }
-    }
-    url = f"https://api.weixin.qq.com/cgi-bin/message/custom/send"
-    r = requests.post(url, json=data)
+    # rec_data = request.get_json()
+    # openid = request.headers.get('x-wx-openid')
+    # message = rec_data['message']
+    # data = {
+    #     "touser": openid,
+    #     "msgtype": "text",
+    #     "text": {
+    #         "content": "Hello World,{}".format(message)
+    #     }
+    # }
+    # url = f"https://api.weixin.qq.com/cgi-bin/message/custom/send??from_appid=wx8bfa8275fb71767f"
+    # r = requests.post(url, json=data)
     return make_succ_empty_response()
 
 # if __name__ == '__main__':
