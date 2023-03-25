@@ -1,7 +1,6 @@
 from flask import Flask, request
 import requests
 from run import app
-from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
 
 #app = Flask(__name__)
 
@@ -20,7 +19,7 @@ def wx():
     # }
     # url = f"https://api.weixin.qq.com/cgi-bin/message/custom/send??from_appid=wx8bfa8275fb71767f"
     # r = requests.post(url, json=data)
-    return make_succ_empty_response()
+    return 'hello'
 
 # if __name__ == '__main__':
 #     app.run()
