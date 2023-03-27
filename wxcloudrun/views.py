@@ -9,6 +9,7 @@ from run import app
 def wx():
     # 接收微信发来的消息
     rec_data = request.get_json()
+    print(rec_data)
     openid = request.headers.get('x-wx-openid')
     message = rec_data['message']
     # 转发给机器人并获得回复
@@ -25,7 +26,7 @@ def wx():
     }
     )
     chatresponse = requests.request("POST",chaturl,headers=chatheaders,data=chatdata)
-
+    print(chatresponse)
     # 解析回复内容，获得机器人答复
     answer=chatresponse.json()['choices'][0]['message']['content']
     response = {
