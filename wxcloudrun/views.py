@@ -12,7 +12,7 @@ def wx():
     # print(rec_data)
     openid = request.headers.get('x-wx-openid')
     message = rec_data['message']
-    code=rec_dat['code']
+    code=rec_data['code']
     # 转发给机器人并获得回复
     wxurl = f"https://api.weixin.qq.com/cgi-bin/message/custom/send?from_appid=wx8bfa8275fb71767f"
     # os.environ["OPENAI_API_KEY"] = "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"
