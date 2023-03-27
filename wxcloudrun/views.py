@@ -17,7 +17,7 @@ def wx():
     chaturl='https://service-5eae8k92-1315204370.sg.apigw.tencentcs.com/v1/chat/completions'
     chatheaders={
         'Content-Type':'application/json',
-        'Authorization': 'Bearer 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'
+        'Authorization': 'Bearer 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'
     }
     chatdata=json.dumps(
     {
