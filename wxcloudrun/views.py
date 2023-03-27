@@ -14,7 +14,7 @@ def wx():
     message = rec_data['message']
     # 转发给机器人并获得回复
     wxurl = f"https://api.weixin.qq.com/cgi-bin/message/custom/send?from_appid=wx8bfa8275fb71767f"
-    os.environ["OPENAI_API_KEY"] = "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"
+    os.environ["OPENAI_API_KEY"] = "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"
     chaturl='https://service-5eae8k92-1315204370.sg.apigw.tencentcs.com/v1/chat/completions'
     chatheaders={
         'Content-Type':'application/json',
@@ -32,7 +32,7 @@ def wx():
     if 'choices' in chatresponse.json():
         answer=chatresponse.json()['choices'][0]['message']['content']
     else:
-        answer=chatresponse.json()['error']['type']
+        answer=chatresponse.json()['error']['code']
     response = {
         "touser": openid,
         "msgtype": "text",
