@@ -32,7 +32,7 @@ def wx():
     if 'choices' in chatresponse.json():
         answer=chatresponse.json()['choices'][0]['message']['content']
     else:
-        answer=chatresponse.json()['type']
+        answer=chatresponse.json()['error']['type']
     response = {
         "touser": openid,
         "msgtype": "text",
