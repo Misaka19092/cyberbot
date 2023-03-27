@@ -1,5 +1,5 @@
 from flask import Flask, request
-import requests,json
+import requests,json,os
 from run import app
 
 #app = Flask(__name__)
@@ -14,10 +14,11 @@ def wx():
     message = rec_data['message']
     # 转发给机器人并获得回复
     wxurl = f"https://api.weixin.qq.com/cgi-bin/message/custom/send?from_appid=wx8bfa8275fb71767f"
+    os.environ["OPENAI_API_KEY"] = "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"
     chaturl='https://service-5eae8k92-1315204370.sg.apigw.tencentcs.com/v1/chat/completions'
     chatheaders={
         'Content-Type':'application/json',
-        'Authorization': 'Bearer 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'
+        'Authorization': 'Bearer {}'.format(os.environ["OPENAI_API_KEY"])
     }
     chatdata=json.dumps(
     {
