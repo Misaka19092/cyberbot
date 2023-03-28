@@ -11,7 +11,7 @@ def wx():
     rec_data = request.get_json()
     # print(rec_data)
     openid = request.headers.get('x-wx-openid')
-    message = rec_data['message']
+    message = json.loads(rec_data['message'])
     code=rec_data['code']
     # wxurl = f"https://api.weixin.qq.com/cgi-bin/message/custom/send?from_appid=wx8bfa8275fb71767f"
 
@@ -27,7 +27,7 @@ def wx():
     {
     'model':'gpt-3.5-turbo',
     # 'messages':[{'role':'user','content':message}]
-    'messages':[message]
+    'messages':message
     }
     )
     chatresponse = requests.request("POST",chaturl,headers=chatheaders,data=chatdata)
