@@ -11,7 +11,8 @@ def wx():
     rec_data = request.get_json()
     # print(rec_data)
     openid = request.headers.get('x-wx-openid')
-    message = json.loads(rec_data['message'])
+    msg='['+rec_data['message']+']'
+    message = json.loads(msg)
     code=rec_data['code']
     # wxurl = f"https://api.weixin.qq.com/cgi-bin/message/custom/send?from_appid=wx8bfa8275fb71767f"
 
