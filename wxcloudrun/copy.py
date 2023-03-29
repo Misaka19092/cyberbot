@@ -10,7 +10,7 @@ def wx():
     # 接收微信发来的消息
     rec_data = request.get_json()
     openid = request.headers.get('x-wx-openid')
-    message = rec_data['message']
+    message = rec_data['message']+"openid:"+openid+"sessionid:"+rec_data['sessionid']
     response = {
         "content": message
     }
