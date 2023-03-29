@@ -43,13 +43,14 @@ def wx():
         }
 
     return response
+
 @app.route('/recall', methods=['POST'])
 def re():
     sessionid=request.get_json()['sessionid']
     openid= request.headers.get('x-wx-openid')
     recallid=openid+'-'+sessionid
     recall = query_historybyid(recallid)
-    while recall is null:
+    while recall is None:
         time.sleep(2)
         recall = query_historybyid(recallid)
     answer0=recall.chatjson
@@ -86,4 +87,6 @@ def after(response):
             history.id = his_id
             history.chatjson = g.message2
             update_historybyid(history)
+        return response
+    if request.endpoint == 'recall':
         return response
