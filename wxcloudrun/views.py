@@ -43,21 +43,21 @@ def wx():
 
     return response
 
-# @app.route('/recall', methods=['POST'])
-# def re():
-#     sessionid=request.get_json()['sessionid']
-#     openid= request.headers.get('x-wx-openid')
-#     recallid=openid+'-'+sessionid
-#     recall = query_historybyid(recallid)
-#     while recall is None:
-#         time.sleep(2)
-#         recall = query_historybyid(recallid)
-#     answer0=recall.chatjson
-#     answer=answer0.json()[-1]['content']
-#     response = {
-#         "content": answer
-#         }
-#     return response
+@app.route('/recall', methods=['POST'])
+def re():
+    sessionid=request.get_json()['sessionid']
+    openid= request.headers.get('x-wx-openid')
+    recallid=openid+'-'+sessionid
+    recall = query_historybyid(recallid)
+    while recall is None:
+        time.sleep(2)
+        recall = query_historybyid(recallid)
+    answer0=recall.chatjson
+    answer=answer0.json()[-1]['content']
+    response = {
+        "content": answer
+        }
+    return response
 
 
 # @app.after_request
