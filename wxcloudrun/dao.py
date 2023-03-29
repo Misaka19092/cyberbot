@@ -3,7 +3,7 @@ import logging
 from sqlalchemy.exc import OperationalError
 
 from wxcloudrun import db
-from cyberbot.wxcloudrun.model import History
+from wxcloudrun.model import History
 
 # 初始化日志
 logger = logging.getLogger('log')
