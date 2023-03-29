@@ -50,7 +50,8 @@ def re():
     recallid=openid+'-'+sessionid
     recall = query_historybyid(recallid)
     if recall is not None:
-        answer=recall.json()[-1]['content']
+        answer0=recall.chatjson
+        answer=answer0.json()[-1]['content']
         response = {
             "content": answer
             }
