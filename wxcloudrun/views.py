@@ -7,7 +7,7 @@ from wxcloudrun.model import History
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
 #app = Flask(__name__)
 
-@app.route('/', methods=['POST'])
+@app.route('/chat', methods=['POST'])
 
 def wx():
     # 接收微信发来的消息
@@ -43,6 +43,20 @@ def wx():
         }
 
     return response
+@app.route('/recall', methods=['POST'])
+def re():
+    sessionid=request.get_json()['sessionid']
+    openid= request.headers.get('x-wx-openid')
+    recallid=openid+'-'+sessionid
+    recall = query_historybyid(recallid)
+    if recall is not None:
+        answer=recall.json()[-1]['content']
+        response = {
+            "content": answer
+            }
+        return response
+
+
 
 # @app.after_request
 # def after(response):
@@ -57,15 +71,16 @@ def wx():
 #     return response
 @app.after_request
 def after(response):
-    his_id=g.openid+'-'+g.sessionid
-    history = query_historybyid(his_id)
-    if history is None:
-        history = History()
-        history.id = his_id
-        history.chatjson = g.message2
-        insert_history(history)
-    else:
-        history.id = his_id
-        history.chatjson = g.message2
-        update_historybyid(history)
-    return response
+    if request.endpoint == 'chat':
+        his_id=g.openid+'-'+g.sessionid
+        history = query_historybyid(his_id)
+        if history is None:
+            history = History()
+            history.id = his_id
+            history.chatjson = g.message2
+            insert_history(history)
+        else:
+            history.id = his_id
+            history.chatjson = g.message2
+            update_historybyid(history)
+        return response
