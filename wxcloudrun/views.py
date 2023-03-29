@@ -42,8 +42,9 @@ def wx():
 
 @app.after_request
 def store():
-    file_dir='./'+g.openid
-    file_path=file_dir+'/'+g.sessionid+'.log'
+    app_root = os.path.dirname(os.path.abspath(__file__))
+    file_dir=app_root+g.openid
+    file_path=file_dir+'/'+g.sessionid+'.txt'
     if not os.path.exists(file_dir):
         os.mkdir(file_dir)
     with open(file_path, "w",encoding='utf-8') as file:
