@@ -3,7 +3,7 @@ import requests,json,os
 from run import app
 from datetime import datetime
 from wxcloudrun.dao import delete_historybyid, query_historybyid, insert_history, update_historybyid
-from wxcloudrun.model import historys
+from wxcloudrun.model import History
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
 #app = Flask(__name__)
 
@@ -60,7 +60,7 @@ def after(response):
     his_id=g.openid+'-'+g.sessionid
     history = query_historybyid(his_id)
     if history is None:
-        history = historys()
+        history = History()
         history.id = his_id
         history.chatjson = g.message2
         insert_history(history)
