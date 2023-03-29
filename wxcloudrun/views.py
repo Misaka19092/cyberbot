@@ -1,7 +1,10 @@
 from flask import Flask, request,g
 import requests,json,os
 from run import app
-
+from datetime import datetime
+from cyberbot.wxcloudrun.dao import delete_historybyid, query_historybyid, insert_history, update_historybyid
+from cyberbot.wxcloudrun.model import historys
+from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
 #app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
@@ -41,14 +44,28 @@ def wx():
 
     return response
 
+# @app.after_request
+# def after(response):
+#     # app_root = os.path.dirname(os.path.abspath(__file__))
+#     app_root='localhost:80'
+#     file_dir=app_root+'/'+g.openid
+#     file_path=file_dir+'/'+g.sessionid+'.txt'
+#     if not os.path.exists(file_dir):
+#         os.mkdir(file_dir)
+#     with open(file_path, "w",encoding='utf-8') as file:
+#         file.write(g.message2)
+#     return response
 @app.after_request
 def after(response):
-    # app_root = os.path.dirname(os.path.abspath(__file__))
-    app_root='localhost:80'
-    file_dir=app_root+'/'+g.openid
-    file_path=file_dir+'/'+g.sessionid+'.txt'
-    if not os.path.exists(file_dir):
-        os.mkdir(file_dir)
-    with open(file_path, "w",encoding='utf-8') as file:
-        file.write(g.message2)
+    his_id=g.openid+'-'+g.sessionid
+    history = query_historybyid(his_id)
+    if history is None:
+        history = historys()
+        history.id = his_id
+        history.chatjson = g.message2
+        insert_history(history)
+    else:
+        history.id = his_id
+        history.chatjson = g.message2
+        update_historybyid(history)
     return response
