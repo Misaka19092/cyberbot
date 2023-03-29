@@ -36,7 +36,7 @@ def wx():
     else:
         answer=chatresponse.json()['error']['code']
     response = {
-        "content": app_root
+        "content": answer
         }
 
     return response
