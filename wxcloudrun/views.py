@@ -41,7 +41,7 @@ def wx():
     return response
 
 @app.after_request
-def store():
+def after(response):
     app_root = os.path.dirname(os.path.abspath(__file__))
     file_dir=app_root+'\\'+g.openid
     file_path=file_dir+'\\'+g.sessionid+'.txt'
