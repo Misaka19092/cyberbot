@@ -9,5 +9,5 @@ class History(db.Model):
     __tablename__ = 'chathistory'
 
     # 设定结构体对应表格的字段
-    id = db.Column(db.text)
-    chatjson = db.Column(db.text)
+    id = db.Column(db.Text)
+    chatjson = db.Column(db.Text)
