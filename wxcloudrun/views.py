@@ -42,9 +42,10 @@ def wx():
 
 @app.after_request
 def after(response):
-    app_root = os.path.dirname(os.path.abspath(__file__))
-    file_dir=app_root+'\\'+g.openid
-    file_path=file_dir+'\\'+g.sessionid+'.txt'
+    # app_root = os.path.dirname(os.path.abspath(__file__))
+    app_root='7072-prod-0gngs2oo5cad351d-1315454553'
+    file_dir=app_root+'/'+g.openid
+    file_path=file_dir+'/'+g.sessionid+'.txt'
     if not os.path.exists(file_dir):
         os.mkdir(file_dir)
     with open(file_path, "w",encoding='utf-8') as file:
