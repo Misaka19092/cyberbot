@@ -91,4 +91,4 @@ def after(response):
             history.id = his_id
             history.chatjson = g.message2
             update_historybyid(history)
-        return 'data stored'
+    return 'data stored'
