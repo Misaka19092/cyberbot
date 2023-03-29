@@ -35,9 +35,11 @@ def wx():
         g.message2='['+message0+',{"role":"assistant","content":"'+answer+'"}'+']'
     else:
         answer=chatresponse.json()['error']['code']
+    app_root = os.path.dirname(os.path.abspath(__file__))
     response = {
-        "content": answer
+        "content": app_root
         }
+
     return response
 
 @app.after_request
