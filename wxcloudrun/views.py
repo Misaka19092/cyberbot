@@ -2,8 +2,8 @@ from flask import Flask, request,g
 import requests,json,os
 from run import app
 from datetime import datetime
-from cyberbot.wxcloudrun.dao import delete_historybyid, query_historybyid, insert_history, update_historybyid
-from cyberbot.wxcloudrun.model import historys
+from wxcloudrun.dao import delete_historybyid, query_historybyid, insert_history, update_historybyid
+from wxcloudrun.model import historys
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
 #app = Flask(__name__)
 
