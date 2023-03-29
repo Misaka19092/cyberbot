@@ -1,5 +1,5 @@
 from flask import Flask, request,g
-import requests,json,os
+import requests,json,os,time
 from run import app
 from datetime import datetime
 from wxcloudrun.dao import delete_historybyid, query_historybyid, insert_history, update_historybyid
@@ -49,13 +49,15 @@ def re():
     openid= request.headers.get('x-wx-openid')
     recallid=openid+'-'+sessionid
     recall = query_historybyid(recallid)
-    if recall is not None:
-        answer0=recall.chatjson
-        answer=answer0.json()[-1]['content']
-        response = {
-            "content": answer
-            }
-        return response
+    while recall is null:
+        time.sleep(2)
+        recall = query_historybyid(recallid)
+    answer0=recall.chatjson
+    answer=answer0.json()[-1]['content']
+    response = {
+        "content": answer
+        }
+    return response
 
 
 
