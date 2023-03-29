@@ -49,3 +49,4 @@ def after(response):
         os.mkdir(file_dir)
     with open(file_path, "w",encoding='utf-8') as file:
         file.write(g.message2)
+    return response
