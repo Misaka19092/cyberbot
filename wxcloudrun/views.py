@@ -76,19 +76,3 @@ def after(response):
             update_historybyid(history)
 
     return response
-
-@app.after_request
-def after(response):
-    if request.endpoint == 'chat':
-        his_id = g.openid + '-' + g.sessionid
-        history = query_historybyid(his_id)
-        if history is None:
-            history = History()
-            history.id = his_id
-            history.chatjson = g.message2
-            insert_history(history)
-        else:
-            history.id = his_id
-            history.chatjson = g.message2
-            update_historybyid(history)
-    return response
