@@ -62,7 +62,7 @@ def re():
 
 @app.after_request
 def after(response):
-    if request.endpoint == 'chat':
+    if request.path == '/chat':
         his_id=g.openid+'-'+g.sessionid
         history = query_historybyid(his_id)
         if history is None:
