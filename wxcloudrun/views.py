@@ -58,7 +58,7 @@ def re():
         time.sleep(2)
         recall = query_historybyid(recallid)
     answer0=recall.chatjson.replace("\n", "-换行符-")
-    answer=json.loads(answer0)[-1]['content'].replace("\\n", "-换行符-")
+    answer=json.loads(answer0)[-1]['content'].replace("-换行符-", "\n")
     response = {
         "content": answer
         }
