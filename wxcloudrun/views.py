@@ -53,7 +53,7 @@ def re():
         time.sleep(2)
         recall = query_historybyid(recallid)
     answer0=recall.chatjson
-    answer=answer0.json()[-1]['content']
+    answer=json.loads(answer0)[-1]['content']
     response = {
         "content": answer
         }
