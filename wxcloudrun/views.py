@@ -13,9 +13,14 @@ def wx():
     rec_data = request.get_json()
     g.openid = request.headers.get('x-wx-openid')
     g.sessionid=rec_data['sessionid']
-    message0=rec_data['message'].replace("\n", "\\n")
-    message1='['+message0+']'
-    message = json.loads(message1).replace("\\n", "\n")
+    message0=rec_data['message']
+    messagejs=message0.replace("\n", "-换行符-")
+    #为了让jsonload正常运行去掉换行符
+    message1='['+messagejs+']'
+    message = json.loads(message1)
+    for msg in message:
+        msg['content']=msg['content'].replace("-换行符-", "\n")
+        #把换行符转换回来
     code=rec_data['code']
     os.environ["OPENAI_API_KEY"] = code
     #只有通过前段回传的方式key才不会失效
@@ -52,8 +57,8 @@ def re():
     while recall is None:
         time.sleep(2)
         recall = query_historybyid(recallid)
-    answer0=recall.chatjson
-    answer=json.loads(answer0)[-1]['content'].replace("\\n", "\n")
+    answer0=recall.chatjson.replace("\n", "-换行符-")
+    answer=json.loads(answer0)[-1]['content'].replace("\\n", "-换行符-")
     response = {
         "content": answer
         }
