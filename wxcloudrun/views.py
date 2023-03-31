@@ -1,5 +1,5 @@
 from flask import Flask, request,g
-import requests,json,os,time,logging
+import requests,json,os,time
 from run import app
 from datetime import datetime
 from wxcloudrun.dao import delete_historybyid, query_historybyid, insert_history, update_historybyid
@@ -84,7 +84,6 @@ def re():
 def after(response):
     if request.path == '/chat':
         his_id=g.openid+'-'+g.sessionid
-        logging(his_id)
         history = query_historybyid(his_id)
         if history is None:
             history = History()
