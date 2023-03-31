@@ -68,9 +68,11 @@ def re():
             break
     History.dispose() #断开连接
     if recall is None:
+        time.sleep(15)
         response={"content":"超时啦"}
     else:
-        answer0=recall.chatjson.replace("\n", "-换行符-")
+        answer0=recall.chatjson
+        answer1=answer0.replace("\n", "-换行符-")
         answer=json.loads(answer0)[-1]['content'].replace("-换行符-", "\n")
         response = {
             "content": answer
