@@ -64,14 +64,17 @@ def re():
         time.sleep(5)
         recall = query_historybyid(recallid)
         retry+=1
-        if retry>=2:
+        if retry>=3:
             break
-    answer0=recall.chatjson.replace("\n", "-换行符-")
     History.dispose() #断开连接
-    answer=json.loads(answer0)[-1]['content'].replace("-换行符-", "\n")
-    response = {
-        "content": answer
-        }
+    if recall is None:
+        response={"content":"超时啦"}
+    else:
+        answer0=recall.chatjson.replace("\n", "-换行符-")
+        answer=json.loads(answer0)[-1]['content'].replace("-换行符-", "\n")
+        response = {
+            "content": answer
+            }
     return response
 
 
