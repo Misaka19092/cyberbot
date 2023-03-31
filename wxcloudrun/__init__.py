@@ -13,14 +13,7 @@ app.config['DEBUG'] = config.DEBUG
 # 设定数据库链接
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{}:{}@{}/flask_demo'.format(config.username, config.password,config.db_address)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
-app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
-    'pool_recycle': 3600,
-    'pool_size': 20,
-    'connect_args': {
-        'charset': 'utf8mb4',
-        'unicode': True,
-    },
-}
+
 # 初始化DB操作对象
 db = SQLAlchemy(app)
 
