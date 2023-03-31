@@ -7,6 +7,11 @@ from wxcloudrun.model import History
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
 #app = Flask(__name__)
 
+@app.route('/', methods=['POST'])
+def index():
+    return 'alive'
+
+
 @app.route('/chat', methods=['POST'])
 def wx():
     # 接收微信发来的消息
@@ -54,10 +59,15 @@ def re():
     openid= request.headers.get('x-wx-openid')
     recallid=openid+'-'+sessionid
     recall = query_historybyid(recallid)
+    retry=0
     while recall is None:
-        time.sleep(2)
+        time.sleep(5)
         recall = query_historybyid(recallid)
+        retry+=1
+        if retry>=2:
+            break
     answer0=recall.chatjson.replace("\n", "-换行符-")
+    History.dispose() #断开连接
     answer=json.loads(answer0)[-1]['content'].replace("-换行符-", "\n")
     response = {
         "content": answer
@@ -79,5 +89,5 @@ def after(response):
             history.id = his_id
             history.chatjson = g.message2
             update_historybyid(history)
-
+        History.dispose()   # 断开连接
     return response

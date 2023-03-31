@@ -11,3 +11,5 @@ class History(db.Model):
     # 设定结构体对应表格的字段
     id = db.Column(db.Text,primary_key=True)
     chatjson = db.Column(db.Text)
+    def dispose():
+        db.engine.dispose()
