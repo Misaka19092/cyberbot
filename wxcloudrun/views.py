@@ -73,7 +73,7 @@ def re():
     else:
         answer0=recall.chatjson
         answer1=answer0.replace("\n", "-换行符-")
-        answer=json.loads(answer0)[-1]['content'].replace("-换行符-", "\n")
+        answer=json.loads(answer1)[-1]['content'].replace("-换行符-", "\n")
         response = {
             "content": answer
             }
