@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
 import pymysql
 import config
 
@@ -14,11 +13,17 @@ app.config['DEBUG'] = config.DEBUG
 # 设定数据库链接
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://{}:{}@{}/flask_demo'.format(config.username, config.password,config.db_address)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
-app.config['SQLALCHEMY_POOL_SIZE'] = 20
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    'pool_recycle': 3600,
+    'pool_size': 20,
+    'connect_args': {
+        'charset': 'utf8mb4',
+        'unicode': True,
+    },
+}
 # 初始化DB操作对象
 db = SQLAlchemy(app)
-engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], encoding='utf8', echo=True, convert_unicode=True)
-db.engine=engine
+
 # 加载控制器
 from wxcloudrun import views
 
